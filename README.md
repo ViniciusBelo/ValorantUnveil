@@ -2,27 +2,23 @@
 
 ### Produzido por Vinicius Belo e Gabriel Barbosa
 ### Alunos de 5° período de Sistemas de informação da UNINASSAU
-### Projeto desenvolvido com back end ***INSERIR LINGUAGENS AQUI***, front end ***INSERIR LINGUAGENS AQUI*** e banco de dados ***INSERIR LINGUAGENS AQUI***
+### Projeto desenvolvido com back end *Java com springboot*, front end *HTML, CSS e Javascript* e banco de dados *H2*
 
-ValorantUnveil é um sistema no qual o usuário poderá consultar informações básicas sobre os agentes, armas e mapas do famoso jogo para desktop "Valorant", como:
+ValorantUnveil é um sistema no qual o usuário poderá consultar informações básicas sobre os agentes e também poderá nos ajudar colocando informações na API do famoso jogo para desktop "Valorant", como:
 - Nome
 - Classe
 - Descrição
-- Habilidades
 
 Abaixo segue algumas imagens do nosso sistema:
-- Agentes
+- Home:
+> [!IMPORTANT]
+> INSERIR AQUI IMAGENS DA TELA HOME
+
+- Agentes:
 > [!IMPORTANT]
 > INSERIR AQUI IMAGENS DA TELA DE AGENTES
 
-- Armas:
+- Ajuda com api:
 > [!IMPORTANT]
-> INSERIR AQUI IMAGENS DA TELA DE ARMAS
+> INSERIR AQUI IMAGENS DA AJUDA COM API
 
-- Mapa:
-> [!IMPORTANT]
-> INSERIR AQUI IMAGENS DA MAPAS
-
-- Tela Secreta:
-> [!IMPORTANT]
-> INSERIR AQUI IMAGENS DA TELA SECRETA
