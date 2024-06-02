@@ -3,8 +3,8 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 ADD . /usr/src/app
 RUN mvn package
-RUN ls -l /usr/src/app/target
 
+RUN ls -l /usr/src/app/target
 FROM eclipse-temurin:17-jdk
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
