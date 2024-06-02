@@ -1,7 +1,7 @@
 services:
   node:
     container_name: node
-    build: ./ValorantUnveil
+    build: ./
     restart: always
     ports:
       - 5001:5001
