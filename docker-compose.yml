@@ -11,7 +11,7 @@ services:
 
   nginx:
     container_name: nginx_app
-    build: ./nginx-1.26.1/nginx.exe
+    build: ./nginx
     restart: always
     ports:
       - 80:80
