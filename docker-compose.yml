@@ -1,6 +1,24 @@
-version: '3.2.5'
-
 services:
+  node:
+    container_name: node
+    build: ./ValorantUnveil
+    restart: always
+    ports:
+      - 5001:5001
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+
+
+  nginx:
+    container_name: nginx_app
+    build: .nginx
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - postgres
+      - node
 
   db: 
     image: postgres
@@ -11,4 +29,11 @@ services:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: blog
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-volume: 
       
