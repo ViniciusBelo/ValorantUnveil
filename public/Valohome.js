@@ -15,8 +15,11 @@ btnExp.addEventListener('click', function(){
     menuSide.classList.toggle('expandir');
 });
 
-// URL base da API
-const API_BASE_URL = "http://localhost:8080/users";
+fetch('/api/users')
+    .then(response => response.json())
+    .then(/* código para manipular a resposta */)
+    .catch(error => console.error('Error fetching user data:', error));
+
 
 const agentsData = [
     { id: 1, name: "Jett", imageUrl: "img/Jett_Artwork_Full.png" },

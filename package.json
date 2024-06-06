@@ -1,5 +1,5 @@
 {
-  "name": "valorant-unveil",
+  "name": "valorantunveil",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.19.2"
+  "devDependencies": {
+    "node": "^20.14.0"
   }
 }

@@ -31,7 +31,7 @@ document.getElementById('agentForm').addEventListener('submit', function(event) 
       bio: document.getElementById('bio').value,
   };
 
-  fetch('http://localhost:8080/users', {
+  fetch('/api/users', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
