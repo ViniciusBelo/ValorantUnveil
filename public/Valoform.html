@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ValorantUnveil — Agentes</title>
+    <title>ValorantUnveil — Adicionar Agente</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="Valoagents.css">
 </head>
@@ -20,7 +20,7 @@
                     <span class="txt-link">Home</span>
                 </a>
             </li>
-            <li class="item-menu ativo">
+            <li class="item-menu">
                 <a href="Valoagents.html">
                     <span class="icon"><i class="bi bi-person-badge"></i></span>
                     <span class="txt-link">Agentes</span>
@@ -32,7 +32,7 @@
                     <span class="txt-link">Mapas</span>
                 </a>
             </li>
-            <li class="item-menu">
+            <li class="item-menu ativo">
                 <a href="Valoform.html">
                     <span class="icon"><i class="bi bi-plus-circle"></i></span>
                     <span class="txt-link">Formulário</span>
@@ -43,32 +43,33 @@
 
     <div class="page-content">
         <div class="page-header">
-            <h1>Agentes</h1>
-            <p>Escolha seu estilo de jogo</p>
+            <h1>Adicionar Agente</h1>
+            <p>Contribua com informações sobre novos agentes</p>
         </div>
-        <div class="container" id="agents-container"></div>
-    </div>
 
-    <div class="modal" id="agent-info-modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="agent-info">
-                <div class="modal-img-wrap">
-                    <img id="modal-agent-img" src="" alt="">
+        <div class="form-container">
+            <div id="form-feedback" class="form-feedback" style="display:none;"></div>
+
+            <form id="agentForm">
+                <div class="form-group">
+                    <label for="name">Nome do Agente</label>
+                    <input type="text" id="name" name="name" placeholder="Ex: Jett" required minlength="2" maxlength="50">
                 </div>
-                <div class="modal-text">
-                    <h2 id="modal-agent-name"></h2>
-                    <span class="classe-badge" id="modal-agent-classe"></span>
-                    <p id="modal-agent-bio"></p>
+                <div class="form-group">
+                    <label for="classe">Classe</label>
+                    <input type="text" id="classe" name="classe" placeholder="Ex: Duelista, Controlador, Iniciador, Sentinela" required minlength="2" maxlength="50">
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="bio">Biografia</label>
+                    <textarea id="bio" name="bio" placeholder="Descreva o agente, sua origem e estilo de jogo..." required minlength="10" maxlength="500"></textarea>
+                </div>
+                <button type="submit" id="submit-btn">
+                    <i class="bi bi-plus-circle"></i> Adicionar Agente
+                </button>
+            </form>
         </div>
     </div>
 
-    <div id="loading" class="loading-overlay" style="display:none;">
-        <div class="spinner"></div>
-    </div>
-
-    <script src="Valohome.js"></script>
+    <script src="Valoform.js"></script>
 </body>
 </html>
