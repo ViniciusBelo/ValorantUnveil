@@ -11,6 +11,7 @@ import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
 
 @Configuration
+@Profile({"dev", "local"})
 public class TestConfig implements CommandLineRunner {
 	
 	@Autowired

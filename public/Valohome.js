@@ -1,81 +1,109 @@
+const API_BASE_URL = '/users';
+
+// ─── Sidebar ───
 var menuItem = document.querySelectorAll('.item-menu');
 
-function selectLink(){
+function selectLink() {
     menuItem.forEach((item) => item.classList.remove('ativo'));
     this.classList.add('ativo');
 }
 
 menuItem.forEach((item) => item.addEventListener('click', selectLink));
 
-// Expandir o menu lateral
 var btnExp = document.querySelector('#btn-exp');
 var menuSide = document.querySelector('.menu-lateral');
 
-btnExp.addEventListener('click', function(){
+btnExp.addEventListener('click', function () {
     menuSide.classList.toggle('expandir');
 });
 
-fetch('/api/users')
-    .then(response => response.json())
-    .then(/* código para manipular a resposta */)
-    .catch(error => console.error('Error fetching user data:', error));
-
-
+// ─── Dados locais dos agentes (id e imagem) ───
 const agentsData = [
-    { id: 1, name: "Jett", imageUrl: "img/Jett_Artwork_Full.png" },
-    { id: 2, name: "Breach", imageUrl: "img/Breach_Artwork_Full.png" },
-    { id: 3, name: "Omen", imageUrl: "img/Omen_Artwork_Full.png" },
-    { id: 4, name: "Brimstone", imageUrl: "img/Brimstone_Artwork_Full.png" },
-    { id: 5, name: "Phoenix", imageUrl: "img/Phoenix_Artwork_Full.png" },
-    { id: 6, name: "Sage", imageUrl: "img/Sage_Artwork_Full.png" },
-    { id: 7, name: "Sova", imageUrl: "img/Sova_Artwork_Full.png" },
-    { id: 8, name: "Viper", imageUrl: "img/Viper_Artwork_Full.png" },
-    { id: 9, name: "Clove", imageUrl: "img/Clove_Artwork_Full.png" },
-    { id: 10, name: "Raze", imageUrl: "img/Raze_Artwork_Full.png" },
-    { id: 11, name: "Cypher", imageUrl: "img/Cypher_Artwork_Full.png" },
-    { id: 12, name: "Killjoy", imageUrl: "img/Killjoy_Artwork_Full.png" },
+    { id: 1,  name: "Jett",      imageUrl: "img/Jett_Artwork_Full.png" },
+    { id: 2,  name: "Breach",    imageUrl: "img/Breach_Artwork_Full.png" },
+    { id: 3,  name: "Omen",      imageUrl: "img/Omen_Artwork_Full.png" },
+    { id: 4,  name: "Brimstone", imageUrl: "img/Brimstone_Artwork_Full.png" },
+    { id: 5,  name: "Phoenix",   imageUrl: "img/Phoenix_Artwork_Full.png" },
+    { id: 6,  name: "Sage",      imageUrl: "img/Sage_Artwork_Full.png" },
+    { id: 7,  name: "Sova",      imageUrl: "img/Sova_Artwork_Full.png" },
+    { id: 8,  name: "Viper",     imageUrl: "img/Viper_Artwork_Full.png" },
+    { id: 9,  name: "Clove",     imageUrl: "img/Clove_Artwork_Full.png" },
+    { id: 10, name: "Raze",      imageUrl: "img/Raze_Artwork_Full.png" },
+    { id: 11, name: "Cypher",    imageUrl: "img/Cypher_Artwork_Full.png" },
+    { id: 12, name: "Killjoy",   imageUrl: "img/Killjoy_Artwork_Full.png" },
 ];
 
-// Função para criar os cards dos agentes
+// ─── Cria os cards dos agentes ───
 function createAgentCards() {
-    const container = document.getElementById("agents-container");
+    const container = document.getElementById('agents-container');
+    if (!container) return; // página não tem o container (ex: Home)
 
     agentsData.forEach(agent => {
-        const card = document.createElement("div");
-        card.classList.add("card");
-        card.innerHTML = `<img src="${agent.imageUrl}" alt="${agent.name}">`;
-        card.addEventListener("click", () => fetchAgentInfo(agent.id));
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const img = document.createElement('img');
+        img.src = agent.imageUrl;
+        img.alt = agent.name;
+
+        const nameLabel = document.createElement('div');
+        nameLabel.classList.add('card-name');
+        nameLabel.textContent = agent.name;
+
+        card.appendChild(img);
+        card.appendChild(nameLabel);
+        card.addEventListener('click', () => fetchAgentInfo(agent.id, agent.imageUrl));
         container.appendChild(card);
     });
 }
 
-// Função para buscar e exibir informações do agente ao clicar no card
-function fetchAgentInfo(agentId) {
+// ─── Busca detalhes do agente na API ───
+function fetchAgentInfo(agentId, imageUrl) {
+    const loading = document.getElementById('loading');
+    if (loading) loading.style.display = 'flex';
+
     fetch(`${API_BASE_URL}/${agentId}`)
-        .then(response => response.json())
-        .then(agent => displayAgentInfo(agent))
-        .catch(error => console.error('Error fetching agent data:', error));
+        .then(response => {
+            if (!response.ok) throw new Error('Agente não encontrado');
+            return response.json();
+        })
+        .then(agent => displayAgentInfo(agent, imageUrl))
+        .catch(error => {
+            console.error('Erro ao buscar agente:', error);
+            alert('Não foi possível carregar as informações do agente. Verifique se o servidor está rodando.');
+        })
+        .finally(() => {
+            if (loading) loading.style.display = 'none';
+        });
 }
 
-// Função para exibir informações do agente em um modal
-function displayAgentInfo(agent) {
-    const modal = document.getElementById("agent-info-modal");
-    const modalContent = document.getElementById("agent-info");
-    const closeModal = document.querySelector(".close");
+// ─── Exibe o modal com informações do agente ───
+function displayAgentInfo(agent, imageUrl) {
+    const modal    = document.getElementById('agent-info-modal');
+    const imgEl    = document.getElementById('modal-agent-img');
+    const nameEl   = document.getElementById('modal-agent-name');
+    const classeEl = document.getElementById('modal-agent-classe');
+    const bioEl    = document.getElementById('modal-agent-bio');
+    const closeBtn = document.querySelector('.close');
 
-    modalContent.innerHTML = `<h2>${agent.name}</h2><p>${agent.bio}</p><p>Classe: ${agent.classe}</p>`;
-    modal.style.display = "block";
+    imgEl.src        = imageUrl || '';
+    imgEl.alt        = agent.name;
+    nameEl.textContent   = agent.name;
+    classeEl.textContent = agent.classe;
+    bioEl.textContent    = agent.bio;
 
-    closeModal.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
 
-    window.addEventListener("click", (event) => {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    });
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // { once: true } garante que o listener não se acumula a cada abertura
+    closeBtn.addEventListener('click', closeModal, { once: true });
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) closeModal();
+    }, { once: true });
 }
 
-// Inicializa a criação dos cards ao carregar a página
 window.onload = createAgentCards;
