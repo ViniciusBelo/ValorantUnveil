@@ -15,6 +15,7 @@ var menuSide = document.querySelector('.menu-lateral');
 
 btnExp.addEventListener('click', function () {
     menuSide.classList.toggle('expandir');
+    document.body.classList.toggle('sidebar-open');
 });
 
 // ─── Dados locais dos agentes (id e imagem) ───

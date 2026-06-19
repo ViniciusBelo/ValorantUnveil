@@ -30,9 +30,7 @@ nav.menu-lateral {
     flex-direction: column;
 }
 
-nav.menu-lateral.expandir {
-    width: 240px;
-}
+nav.menu-lateral.expandir { width: 240px; }
 
 .btn-expandir {
     padding: 0 0 16px 16px;
@@ -82,12 +80,25 @@ ul li.item-menu a .icon > i {
     margin-left: 10px;
 }
 
+/* ─── Offset do conteúdo (segue estado da sidebar) ─── */
+.hero,
+.cta-grid,
+.descricao {
+    margin-left: 70px;
+    transition: margin-left .35s ease;
+}
+
+body.sidebar-open .hero,
+body.sidebar-open .cta-grid,
+body.sidebar-open .descricao {
+    margin-left: 240px;
+}
+
 /* ─── Hero ─── */
 .hero {
-    margin-left: 70px;
     background: linear-gradient(135deg, #1a0000 0%, #111 60%);
     border-bottom: 1px solid #2a0000;
-    padding: 52px 40px 40px;
+    padding: 52px 60px 40px;
     position: relative;
     overflow: hidden;
 }
@@ -109,65 +120,27 @@ ul li.item-menu a .icon > i {
     line-height: 1.15;
 }
 
-.hero-title span {
-    color: #c0392b;
-}
+.hero-title span { color: #c0392b; }
 
 .hero-sub {
     color: #888;
     font-size: 16px;
     margin-top: 10px;
-    max-width: 500px;
 }
 
-/* ─── Conteúdo ─── */
-.descricao {
-    margin-left: 70px;
-    padding: 36px 40px;
-    max-width: 860px;
-}
-
-.secao {
-    background: #181818;
-    border: 1px solid #222;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 20px;
-}
-
-.titulo {
-    font-size: 18px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #8C0000;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.titulo i { color: #8C0000; font-size: 20px; }
-
-.separa {
-    color: #999;
-    font-size: 15px;
-    line-height: 1.8;
-    margin-bottom: 14px;
-}
-
-.separa:last-child { margin-bottom: 0; }
-
-/* ─── Cards CTA ─── */
+/* ─── CTA Grid ─── */
 .cta-grid {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
-    margin: 0 40px 0 40px;
-    max-width: 860px;
+    padding: 28px 60px 0;
+    justify-content: center;
 }
 
 .cta-card {
     flex: 1;
+    min-width: 200px;
+    max-width: 280px;
     background: #181818;
     border: 1px solid #2a2a2a;
     border-radius: 12px;
@@ -201,3 +174,44 @@ ul li.item-menu a .icon > i {
 }
 
 .cta-card span { font-size: 13px; color: #888; }
+
+/* ─── Conteúdo centralizado ─── */
+.descricao {
+    padding: 32px 60px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.secao {
+    width: 100%;
+    max-width: 720px;
+    background: #181818;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+
+.titulo {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #8C0000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.titulo i { color: #8C0000; font-size: 20px; }
+
+.separa {
+    color: #999;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+}
+
+.separa:last-child { margin-bottom: 0; }

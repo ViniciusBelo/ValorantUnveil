@@ -85,10 +85,15 @@ ul li.item-menu a .icon > i {
     margin-left: 10px;
 }
 
-/* ─── Layout geral ─── */
+/* ─── Layout geral (offset segue estado da sidebar) ─── */
 .page-content {
     margin-left: 70px;
+    transition: margin-left .35s ease;
     padding: 0 0 40px 0;
+}
+
+body.sidebar-open .page-content {
+    margin-left: 240px;
 }
 
 .page-header {
