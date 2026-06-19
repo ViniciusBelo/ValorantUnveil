@@ -1,24 +1,137 @@
-### Produzido por Vinicius Belo e Gabriel Barbosa
-### Alunos de 5° período de Sistemas de informação da UNINASSAU
-### Projeto desenvolvido com back end **Java com springboot**, front end **HTML, CSS, Javascript e Nodejs** e banco de dados **Postgresql**
+# ValorantUnveil
 
-ValorantUnveil é um sistema no qual o usuário poderá consultar informações básicas sobre os agentes e também poderá nos ajudar colocando informações na API do famoso jogo para desktop "Valorant", como:
-- Nome
-- Classe
-- Descrição
+**Produzido por Vinicius Belo e Gabriel Barbosa**  
+Alunos do 5° período de Sistemas de Informação da UNINASSAU
 
-Abaixo segue algumas imagens do nosso sistema:
+---
+
+## Sobre o projeto
+
+ValorantUnveil é uma plataforma web dedicada ao jogo **Valorant**, onde o usuário pode explorar informações sobre agentes e mapas do jogo.
+
+### Funcionalidades
+
+- **Home** — Apresentação do projeto e do jogo, com atalhos para as seções principais
+- **Agentes** — Grid com os 12 agentes do jogo, cada card exibe a imagem do personagem com seu nome. Ao clicar, abre um modal com:
+  - Imagem do agente
+  - Nome e classe (Duelista, Iniciador, Controlador, Sentinela)
+  - Biografia completa
+- **Mapas** — Página que consome a **API pública do Valorant** em tempo real, exibindo todos os mapas jogáveis com:
+  - Imagem oficial do mapa
+  - Nome e localização no mundo real
+  - Descrição narrativa
+  - Característica tática exclusiva de cada mapa
+  - Pontos do mapa (callouts: A Site, B Site, Mid, etc.)
+
+---
+
+## Tecnologias
+
+| Camada | Tecnologia |
+|---|---|
+| Back-end | Java 17+ com Spring Boot 3.2 |
+| Banco de dados | H2 (in-memory, sem instalação) |
+| Front-end | HTML5, CSS3, JavaScript puro |
+| Dados de mapas | [valorant-api.com](https://valorant-api.com) (API pública) |
+| Ícones | Bootstrap Icons 1.11 |
+| Fonte | Google Fonts — Outfit |
+
+---
+
+## Como rodar
+
+### Pré-requisitos
+
+- **Java 17 ou superior** instalado
+- **VSCode** com a extensão **Oracle Java** instalada (ou Maven configurado no PATH)
+
+### Passo a passo
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/ViniciusBelo/ValorantUnveil.git
+   cd ValorantUnveil
+   ```
+
+2. Dê **duplo clique** no arquivo `rodar.bat` na raiz do projeto.
+
+3. Aguarde a mensagem `Started CourseApplication` aparecer no terminal.
+
+4. Abra o navegador em:
+
+   | Página | URL |
+   |---|---|
+   | Home | http://localhost:8080 |
+   | Agentes | http://localhost:8080/Valoagents.html |
+   | Mapas | http://localhost:8080/Valomaps.html |
+
+5. Para parar o servidor: `Ctrl+C` no terminal.
+
+> **Sem necessidade de PostgreSQL.** O projeto usa banco H2 em memória — os 12 agentes são carregados automaticamente ao iniciar.
+
+### Rodando manualmente (sem o .bat)
+
+Se preferir via terminal:
+
+```bash
+# Compilar
+mvn package -DskipTests
+
+# Executar
+java -jar target/course-0.0.1-SNAPSHOT.jar
+```
+
+---
+
+## Estrutura do projeto
+
+```
+ValorantUnveil/
+├── public/                  # Frontend (HTML, CSS, JS)
+│   ├── Valohome.html        # Página Home
+│   ├── Valoagents.html      # Página de Agentes
+│   ├── Valomaps.html        # Página de Mapas
+│   ├── Valohome.css         # Estilos da Home
+│   ├── Valoagents.css       # Estilos de Agentes e Mapas
+│   ├── Valohome.js          # Lógica dos cards de agentes
+│   └── Valomaps.js          # Lógica da página de mapas
+├── img/                     # Imagens dos agentes
+├── src/main/java/           # Código Java (Spring Boot)
+│   └── com/educandoweb/course/
+│       ├── entities/        # Entidade User (agente)
+│       ├── repositories/    # JPA Repository
+│       ├── services/        # Regras de negócio
+│       ├── resources/       # Controllers REST
+│       └── config/          # CORS, dados de teste, recursos estáticos
+├── src/main/resources/
+│   ├── application.properties        # Perfil ativo: local
+│   └── application-local.properties  # Config H2 in-memory
+└── rodar.bat                # Script para iniciar o projeto no Windows
+```
+
+---
+
+## API REST
+
+O back-end expõe endpoints REST para os agentes:
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| GET | `/users` | Lista todos os agentes |
+| GET | `/users/{id}` | Busca agente por ID |
+| POST | `/users` | Cadastra novo agente |
+| PUT | `/users/{id}` | Atualiza agente |
+| DELETE | `/users/{id}` | Remove agente |
+
+---
+
+## Imagens do sistema
+
 - Home:
->![Home1](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/37b189c6-ade2-4eb7-a4b7-06824a6bb877)
->![Home2](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/423eaf96-d129-4032-9df7-8b1d18646f2f)
-<br>
+> ![Home1](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/37b189c6-ade2-4eb7-a4b7-06824a6bb877)
+> ![Home2](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/423eaf96-d129-4032-9df7-8b1d18646f2f)
 
 - Agentes:
 > ![Agents1](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/c354846c-c7e1-4c5b-b8aa-f49f28f3d5d9)
 > ![Agents2](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/99af025f-da1d-43b8-b81a-5266715924c9)
 > ![Agents3](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/c40f3d6b-c353-4016-af2d-c6da657d8d21)
-<br>
-
-- Ajuda com api:
-> ![AjudaAPI1](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/eb7c0a34-ce1b-4dcb-9c2e-c6215c5419b1)
-> ![AjudaAPI2](https://github.com/ViniciusBelo/ValorantUnveil/assets/135560124/d22c0934-6277-41c9-b032-89b4d8ce2598)
