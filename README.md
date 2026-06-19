@@ -22,6 +22,7 @@ ValorantUnveil é uma plataforma web dedicada ao jogo **Valorant**, onde o usuá
   - Descrição narrativa
   - Característica tática exclusiva de cada mapa
   - Pontos do mapa (callouts: A Site, B Site, Mid, etc.)
+- **Formulário** — Cadastro de novos agentes na API local com campos de nome, classe e biografia
 
 ---
 
@@ -64,6 +65,7 @@ ValorantUnveil é uma plataforma web dedicada ao jogo **Valorant**, onde o usuá
    | Home | http://localhost:8080 |
    | Agentes | http://localhost:8080/Valoagents.html |
    | Mapas | http://localhost:8080/Valomaps.html |
+   | Formulário | http://localhost:8080/Valoform.html |
 
 5. Para parar o servidor: `Ctrl+C` no terminal.
 
@@ -91,10 +93,12 @@ ValorantUnveil/
 │   ├── Valohome.html        # Página Home
 │   ├── Valoagents.html      # Página de Agentes
 │   ├── Valomaps.html        # Página de Mapas
+│   ├── Valoform.html        # Página de Formulário
 │   ├── Valohome.css         # Estilos da Home
-│   ├── Valoagents.css       # Estilos de Agentes e Mapas
+│   ├── Valoagents.css       # Estilos de Agentes, Mapas e Formulário
 │   ├── Valohome.js          # Lógica dos cards de agentes
-│   └── Valomaps.js          # Lógica da página de mapas
+│   ├── Valomaps.js          # Lógica da página de mapas
+│   └── Valoform.js          # Lógica do formulário de cadastro
 ├── img/                     # Imagens dos agentes
 ├── src/main/java/           # Código Java (Spring Boot)
 │   └── com/educandoweb/course/
